@@ -96,7 +96,7 @@ def extract_cell_numbers_from_file(links_filename, output_filename):
         except requests.HTTPError as e:
             pass
 
-    with open(output_filename, "a") as file:  # Use "a" mode for appending instead of "w" for writing
+    with open(output_filename, "a") as file:  
         for number in cell_numbers:
             file.write(number + "\n")
 
