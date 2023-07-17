@@ -3,6 +3,22 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import re
 
+def checkWhats(numero):
+    response = ''
+    while True:
+        try:
+            headers = {
+                'content-type': 'application/json',
+            }
+            response = requests.get(
+                f'https://api.z-api.io/instances/{instancia_id}/token/{instancia_token}/phone-exists/55{numero}',
+                headers=headers,
+            ).json()
+            break
+        except:
+            continue
+    return response
+
 def remove_duplicate_lines(file_path):
     with open(file_path, 'r') as file:
         lines = file.readlines()
@@ -78,7 +94,7 @@ def extract_cell_numbers_from_file(links_filename, output_filename):
             numbers = extract_cell_numbers(response.text)
             cell_numbers.extend(numbers)
         except requests.HTTPError as e:
-            print(f"Error occurred while accessing {link}: {e}")
+            pass
 
     with open(output_filename, "a") as file:  # Use "a" mode for appending instead of "w" for writing
         for number in cell_numbers:
@@ -88,9 +104,20 @@ def extract_cell_numbers_from_file(links_filename, output_filename):
     print(f"Telefones salvos em:  {output_filename}.")
 
 if __name__ == '__main__':
+    print("""
+          
+
+██████  ███    ███ ██ ████████ ██████  ██        ██████  ███████ ████████ ██    ██ 
+██   ██ ████  ████ ██    ██    ██   ██ ██       ██       ██         ██    ██    ██ 
+██   ██ ██ ████ ██ ██    ██    ██████  ██ █████ ██   ███ ███████    ██    ██    ██ 
+██   ██ ██  ██  ██ ██    ██    ██   ██ ██       ██    ██      ██    ██     ██  ██  
+██████  ██      ██ ██    ██    ██   ██ ██        ██████  ███████    ██      ████ 
+       TELEGRAM: +7 906 849 1831                                   RECUSE IMITAÇÕES""")
     print('Escolha uma opção - Digite somente o número sem parênteses!')
     print(' (1) -  para pesquisa e extração de links')
     print(' (2) -  para extração de telefones dos links')
+    print(' (3) -  para verificar se existe WhastApp')
+    print(' (4) -  para sair e finalizar o programa')
     resposta = input('Digite sua resposta: ')
 
     if resposta == '1':
@@ -102,9 +129,40 @@ if __name__ == '__main__':
         links_name_file = "links.txt"
         saida_name_file = "telefones.txt"
         extract_cell_numbers_from_file(links_name_file, saida_name_file)
+        
+    elif resposta == '3':
+        print('A validação vai ser a partir dos telefones salvos na ETAPA/OPÇÃO 2')
+        instancia_id = input('Digite seu instancia_id: ')
+        instancia_token = input('Digite seu instancia_token: ')
+        if not instancia_id and instancia_token:
+            print('Os campos não podem ser vazios.')
+            print('Encerrando...')
+            exit()
+            
+        else:
+            db = open('telefones.txt', 'r')
+            linhas = db.readlines()
+            aprovados = open('lista_whatsapp.txt', 'a')
+            for linha in linhas:
+                numero = linha.strip()
+                while True:
+                    try:
+                        if checkWhats(numero)['exists'] == True:
+                            with open('lista_whatsapp.txt', 'a') as file:
+                                file.write(numero + '\n')
+                        break
+                    except Exception as e:
+                        print(e)
+                        continue
+            aprovados.close()
+            print('WhatApp salvos..')                                                                 
+        
+    elif resposta == '4':
+        print('Programa encerrado.')
+        exit()
 
-    elif resposta != "1" or "2":
-        print('Escolha somente entre 1 ou 2')
+    elif resposta != '1' or '2' or '3' or '4':
+        print('Escolha somente entre 1, 2, 3 ou 4')
         
 print('Feito por: dmitri-gstv')
 print('Feito por: dmitri-gstv')

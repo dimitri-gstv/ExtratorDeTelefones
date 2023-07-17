@@ -6,10 +6,13 @@
 2 - Baixar repositorio 
 - https://github.com/dimitri-gstv/ExtratorDeTelefones
 
-3 - Abrir o terminal e executar programa
+3 - Instalar dependencias
+-  pip install -r requirements.txt
+
+4 - Abrir o terminal e executar programa
 - python main.py
 
-4 - Escolher a opção desejada
+5 - Escolher a opção desejada
 
 ![image](https://github.com/dimitri-gstv/ExtratorDeTelefones/assets/139076055/ec1d3857-f930-467a-adcb-a802b560c5d2)
 
