@@ -72,7 +72,8 @@ def extract_cell_numbers_from_file(links_filename, output_filename):
     for link in links:
         link = link.strip()
         try:
-            response = requests.get(link)
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'}
+            response = requests.get(link, headers=headers)
             response.raise_for_status()
             numbers = extract_cell_numbers(response.text)
             cell_numbers.extend(numbers)
@@ -84,8 +85,7 @@ def extract_cell_numbers_from_file(links_filename, output_filename):
             file.write(number + "\n")
 
     remove_duplicate_lines(output_filename)
-    print(f"Successfully saved {len(cell_numbers)} cell phone numbers to {output_filename}.")
-
+    print(f"Telefones salvos em:  {output_filename}.")
 
 if __name__ == '__main__':
     print('Escolha uma opção - Digite somente o número sem parênteses!')
