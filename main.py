@@ -164,6 +164,6 @@ if __name__ == '__main__':
     elif resposta != '1' or '2' or '3' or '4':
         print('Escolha somente entre 1, 2, 3 ou 4')
         
-print('Feito por: dmitri-gstv')
-print('Feito por: dmitri-gstv')
-print('Feito por: dmitri-gstv')
+print('Feito por: dmitri-gstv!')
+print('Feito por: dmitri-gstv!')
+print('Feito por: dmitri-gstv!')
