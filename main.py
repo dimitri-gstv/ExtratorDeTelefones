@@ -105,3 +105,7 @@ if __name__ == '__main__':
 
     elif resposta != "1" or "2":
         print('Escolha somente entre 1 ou 2')
+        
+print('Feito por: dmitri-gstv')
+print('Feito por: dmitri-gstv')
+print('Feito por: dmitri-gstv')
